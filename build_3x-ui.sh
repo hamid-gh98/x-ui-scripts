@@ -30,9 +30,6 @@ VERSION="1.0.0"
 #   5. Alma
 #   6. Rocky
 # 
-# One-Line Command for installation: (use of this commands)
-#   `bash <(curl -sSL ...)`
-# 
 
 
 # Define colors
