@@ -76,10 +76,13 @@ TEMP_FOLDER="/temp/3x-ui"
 ROOT_FOLDER="/usr/local/x-ui"
 BIN_FOLDER="${ROOT_FOLDER}/bin"
 DB_FOLDER="/etc/x-ui"
+SERVICE_FILE="/etc/systemd/system/x-ui.service"
 
 # Status Variables
-# STEP_STATUS ==>  (0: failed) | (1: success) 
+# STEP_STATUS ==>  (0: failed) | (1: success)
+# XUI_STATUS  ==>  (0: running) | (1: not running) | (2: not installed)
 STEP_STATUS=1
+XUI_STATUS=2
 
 # OS Variables
 OS_SYS=
@@ -552,16 +555,30 @@ function step_install_go() {
 }
 
 
+function check_status() {
+  if [[ ! -f "${SERVICE_FILE}" ]]; then
+    XUI_STATUS=2
+  fi
+  state=$(systemctl status x-ui | grep Active | awk '{print $3}' | cut -d "(" -f2 | cut -d ")" -f1)
+  if [[ "${state}" == "running" ]]; then
+    XUI_STATUS=0
+  else
+    XUI_STATUS=1
+  fi
+}
+
+
 function step_uninstall_3xui() {
   {
-    if [[ -f /etc/systemd/system/x-ui.service ]];then
+    if [[ "${XUI_STATUS}" -ne 2 ]]; then
       systemctl stop x-ui
       systemctl disable x-ui
-      rm -f /etc/systemd/system/x-ui.service
+      rm -f "${SERVICE_FILE}"
+      rm -rf "${ROOT_FOLDER}"
     fi
     systemctl daemon-reload
     systemctl reset-failed
-    rm -rf ${ROOT_FOLDER}
+    sleep 2
   }
   [[ $? -ne 0 ]] && STEP_STATUS=0
 }
@@ -577,7 +594,7 @@ function step_build_3xui() {
     export GOARCH="${GO_ARCH}"
 
     go build main.go
-    mv main ${ROOT_FOLDER}/x-ui
+    mv main "${ROOT_FOLDER}/x-ui"
 
     cd ${BIN_FOLDER}
     rm -f iran.dat geoip.dat geosite.dat
@@ -599,7 +616,7 @@ function step_build_3xui() {
     touch "${ROOT_FOLDER}/access.log"
     touch "${ROOT_FOLDER}/error.log"
 
-    cat <<- EOF > /etc/systemd/system/x-ui.service
+    cat <<- EOF > "${SERVICE_FILE}"
 [Unit]
 Description=x-ui Service
 After=network.target
@@ -783,7 +800,9 @@ if confirm "${T[025]}" "y/N"; then
     install_go
   fi
 
+  check_status
   uninstall_3xui
+  make_folders
   install_3xui
 
   confirm "${T[027]}" "Y/n" && uninstall_go
