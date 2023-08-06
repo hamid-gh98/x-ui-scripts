@@ -20,3 +20,9 @@ bash <(curl -sSL https://raw.githubusercontent.com/hamid-gh98/x-ui-scripts/main/
 
 - `-y` => Accepting default values
 - `-f` => Forcing reinstall Warp Socks5 Proxy (WireProxy)
+
+### commands
+
+- `warp u` => Uninstall Warp
+- `warp a` => Change Warp Account Type (free, plus, ...)
+- `warp y` => Turn on/off WireProxy
