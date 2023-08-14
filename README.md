@@ -33,7 +33,7 @@ bash <(curl -sSL https://raw.githubusercontent.com/hamid-gh98/x-ui-scripts/main/
   1. Go to Panel > Settings > Xray Configurations > Complete Template
   2. Find the object with tag `WARP` in outbounds:
      <details>
-      <summary>Click for see json object</summary>
+      <summary>Click to see json object</summary>
       ```json
       {
         "tag": "WARP",
@@ -51,7 +51,7 @@ bash <(curl -sSL https://raw.githubusercontent.com/hamid-gh98/x-ui-scripts/main/
      </details>
   3. Replace it with the following json object:
      <details>
-      <summary>Click for see json object</summary>
+      <summary>Click to see json object</summary>
       ```json
       {
         "tag": "WARP-socks5",
@@ -78,4 +78,4 @@ bash <(curl -sSL https://raw.githubusercontent.com/hamid-gh98/x-ui-scripts/main/
       ```
      </details>
 - **To use IPv6 for routing warp:**
-  Follow the same steps as for IPv4, replacing `UseIPv4` with `UseIPv6`
+  - Follow the same steps as for IPv4, replacing `UseIPv4` with `UseIPv6`
