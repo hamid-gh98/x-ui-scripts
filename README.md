@@ -32,43 +32,50 @@ bash <(curl -sSL https://raw.githubusercontent.com/hamid-gh98/x-ui-scripts/main/
 - **To use IPv4 for routing warp:**
   1. Go to Panel > Settings > Xray Configurations > Complete Template
   2. Find the object with tag `WARP` in outbounds:
-     ```json
-     {
-       "tag": "WARP",
-       "protocol": "socks",
-       "settings": {
-         "servers": [
-           {
-             "address": "127.0.0.1",
-             "port": 40000
-           }
-         ]
-       }
-     }
-     ```
+     <details>
+      <summary>Click for see json object</summary>
+      ```json
+      {
+        "tag": "WARP",
+        "protocol": "socks",
+        "settings": {
+          "servers": [
+            {
+              "address": "127.0.0.1",
+              "port": 40000
+            }
+          ]
+        }
+      }
+      ```
+     </details>
   3. Replace it with the following json object:
-     ```json
-     {
-       "tag": "WARP-socks5",
-       "protocol": "socks",
-       "settings": {
-         "servers": [
-           {
-             "address": "127.0.0.1",
-             "port": 40000
-           }
-         ]
-       }
-     },
-     {
-       "tag":"WARP",
-       "protocol":"freedom",
-       "proxySettings":{
-         "tag":"WARP-socks5"
-       },
-       "settings":{
-         "domainStrategy":"UseIPv4"
-       }
-     }
-     ```
-- **Use IPv6 for routing warp:** Follow the same steps as for IPv4, replacing `UseIPv4` with `UseIPv6`
+     <details>
+      <summary>Click for see json object</summary>
+      ```json
+      {
+        "tag": "WARP-socks5",
+        "protocol": "socks",
+        "settings": {
+          "servers": [
+            {
+              "address": "127.0.0.1",
+              "port": 40000
+            }
+          ]
+        }
+      },
+      {
+        "tag":"WARP",
+        "protocol":"freedom",
+        "proxySettings":{
+          "tag":"WARP-socks5"
+        },
+        "settings":{
+          "domainStrategy":"UseIPv4"
+        }
+      }
+      ```
+     </details>
+- **To use IPv6 for routing warp:**
+  Follow the same steps as for IPv4, replacing `UseIPv4` with `UseIPv6`
