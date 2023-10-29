@@ -10,7 +10,7 @@ This repository contains some useful scripts for x-ui and 3x-ui.
 bash <(curl -sSL https://raw.githubusercontent.com/hamid-gh98/x-ui-scripts/main/build_3x-ui.sh)
 ```
 
-## Install [Warp](https://github.com/fscarmen/warp) (on socks5 proxy) for 3x-ui
+## Install [Warp](https://gitlab.com/fscarmen/warp) (on socks5 proxy) for 3x-ui
 
 ```sh
 bash <(curl -sSL https://raw.githubusercontent.com/hamid-gh98/x-ui-scripts/main/install_warp_proxy.sh)
