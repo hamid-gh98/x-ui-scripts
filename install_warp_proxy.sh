@@ -476,7 +476,10 @@ function step_install_pkgs() {
 function step_create_command() {
   {
     mkdir -p /etc/wireguard
-    wget -N -P /etc/wireguard https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh
+    # Temporary fix for error during installation after version 3.0.0 fscarmen/warp !!
+    # Using the version 2.5.3 for now until it get fixed!
+    # wget -N -P /etc/wireguard https://gitlab.com/fscarmen/warp/-/raw/main/menu.sh
+    wget -N -P /etc/wireguard https://gitlab.com/fscarmen/warp/-/raw/594e1d5944ce357ea865054fa53ed4c050ec3c49/menu.sh
     chmod +x /etc/wireguard/menu.sh
     ln -sf /etc/wireguard/menu.sh /usr/bin/warp
   }
